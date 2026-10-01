@@ -254,17 +254,19 @@
         const DELIVERY_FEE = 30;
         let tempOrderData = {};
 
-        // โหลดข้อมูลที่เคยเซฟไว้ในเครื่องมาใส่ช่องอัตโนมัติ
+        // ฟังก์ชันโหลดข้อมูลที่เคยเซฟไว้ใน localStorage มาใส่ฟอร์มทันทีเมื่อเปิดหน้าเว็บ
+        function loadSavedAddress() {
+            const savedName = localStorage.getItem('saved_name');
+            const savedPhone = localStorage.getItem('saved_phone');
+            const savedAddress = localStorage.getItem('saved_address');
+
+            if (savedName) document.getElementById('cust-name').value = savedName;
+            if (savedPhone) document.getElementById('cust-phone').value = savedPhone;
+            if (savedAddress) document.getElementById('cust-address').value = savedAddress;
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
-            if (localStorage.getItem('saved_name')) {
-                document.getElementById('cust-name').value = localStorage.getItem('saved_name');
-            }
-            if (localStorage.getItem('saved_phone')) {
-                document.getElementById('cust-phone').value = localStorage.getItem('saved_phone');
-            }
-            if (localStorage.getItem('saved_address')) {
-                document.getElementById('cust-address').value = localStorage.getItem('saved_address');
-            }
+            loadSavedAddress();
             renderProducts();
         });
 
@@ -374,6 +376,8 @@
                 alert('กรุณาเลือกสินค้าใส่ตะกร้าก่อนครับ');
                 return;
             }
+            // โหลดข้อมูลที่เซฟไว้มาเติมใส่ฟอร์มทุกครั้งที่เปิด modal ขึ้นมา
+            loadSavedAddress();
             toggleCart();
             document.getElementById('checkout-modal').classList.remove('hidden');
         };
@@ -382,7 +386,6 @@
             document.getElementById('checkout-modal').classList.add('hidden');
         };
 
-        // เมื่อกดปุ่มไปยังหน้าชำระเงิน จะเซฟข้อมูลลง localStorage ทันที
         document.getElementById('checkout-form').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -391,7 +394,7 @@
             const address = document.getElementById('cust-address').value;
             const paymentMethod = document.getElementById('payment-method').value;
 
-            // บันทึกข้อมูลลงในเบราว์เซอร์
+            // บันทึกข้อมูลลงในเบราว์เซอร์ทันทีที่กดส่ง
             localStorage.setItem('saved_name', name);
             localStorage.setItem('saved_phone', phone);
             localStorage.setItem('saved_address', address);
@@ -477,7 +480,6 @@
 
                 cart = [];
                 updateCartUI();
-                document.getElementById('checkout-form').reset();
                 document.getElementById('slip-file-input').value = '';
 
             } catch (error) {
