@@ -16,8 +16,34 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
+    <!-- Admin Login Modal -->
+    <div id="admin-login-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-8 text-center space-y-6">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl mx-auto flex items-center justify-center text-2xl shadow-inner">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold text-gray-900">เข้าสู่ระบบแอดมิน</h2>
+                <p class="text-xs text-gray-500 mt-1">กรุณากรอกรหัสผ่านเพื่อจัดการร้านค้า</p>
+            </div>
+            <form id="admin-login-form" class="space-y-4">
+                <div>
+                    <input type="password" id="admin-pass" required placeholder="กรอกรหัสผ่าน (ค่าเริ่มต้น: 1234)" class="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:outline-none text-sm text-center">
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-3.5 rounded-2xl shadow-lg shadow-emerald-600/30 transition text-sm">
+                    เข้าสู่ระบบ
+                </button>
+            </form>
+            <div class="text-left">
+                <a href="index.html" class="text-xs text-gray-400 hover:text-gray-600 flex items-center justify-center">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> กลับสู่หน้าร้านค้าหลัก
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Dashboard -->
-    <div id="dashboardContent">
+    <div id="dashboardContent" class="hidden">
         <!-- Header -->
         <header class="bg-white shadow-sm sticky top-0 z-40">
             <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
@@ -31,7 +57,6 @@
                     </div>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <!-- แก้ไขให้เปิดเป็นแท็บใหม่ จะได้ไม่ปิดหน้าแอดมินหนี -->
                     <a href="index.html" target="_blank" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium transition flex items-center">
                         <i class="fa-solid fa-arrow-left mr-2"></i>หน้าร้านค้า
                     </a>
@@ -123,9 +148,30 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        const ADMIN_PASSWORD = "1";
+
         window.onload = function() {
-            fetchOrders();
+            const isLogged = sessionStorage.getItem('isAdminLoggedIn');
+            if (isLogged === 'true') {
+                document.getElementById('admin-login-modal').classList.add('hidden');
+                document.getElementById('dashboardContent').classList.remove('hidden');
+                fetchOrders();
+            }
         };
+
+        document.getElementById('admin-login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const pass = document.getElementById('admin-pass').value;
+            if (pass === ADMIN_PASSWORD) {
+                sessionStorage.setItem('isAdminLoggedIn', 'true');
+                document.getElementById('admin-login-modal').classList.add('hidden');
+                document.getElementById('dashboardContent').classList.remove('hidden');
+                fetchOrders();
+            } else {
+                alert('รหัสผ่านไม่ถูกต้อง! กรุณาลองใหม่อีกครั้ง');
+                document.getElementById('admin-pass').value = '';
+            }
+        });
 
         async function fetchOrders() {
             const tableBody = document.getElementById('orderTableBody');
