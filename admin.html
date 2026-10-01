@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinFruit - แดชบอร์ดเจ้าของร้าน</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Prompt -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Prompt', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-green-500 text-white p-2 rounded-xl">
+                    <i class="fa-solid fa-store text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-gray-900">FinFruit Admin</h1>
+                    <p class="text-xs text-gray-500">ระบบจัดการร้านค้าและออเดอร์</p>
+                </div>
+            </div>
+            <div>
+                <a href="index.html" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium transition">
+                    <i class="fa-solid fa-arrow-left mr-2"></i>กลับสู่หน้าร้านค้า
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        
+        <!-- Stats Summary -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500 font-medium">ออเดอร์ทั้งหมด</p>
+                    <h3 id="totalOrders" class="text-3xl font-bold text-gray-900 mt-1">0</h3>
+                </div>
+                <div class="bg-green-50 text-green-600 p-4 rounded-xl">
+                    <i class="fa-solid fa-clipboard-list text-2xl"></i>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500 font-medium">ยอดขายรวมทั้งหมด</p>
+                    <h3 id="totalRevenue" class="text-3xl font-bold text-green-600 mt-1">฿0</h3>
+                </div>
+                <div class="bg-emerald-50 text-emerald-600 p-4 rounded-xl">
+                    <i class="fa-solid fa-wallet text-2xl"></i>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500 font-medium">สถานะระบบ</p>
+                    <h3 class="text-lg font-bold text-green-500 mt-2 flex items-center">
+                        <span class="w-3 h-3 bg-green-500 rounded-full inline-block mr-2 animate-pulse"></span> เชื่อมต่อ Realtime แล้ว
+                    </h3>
+                </div>
+                <div class="bg-blue-50 text-blue-600 p-4 rounded-xl">
+                    <i class="fa-solid fa-database text-2xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Orders Table Section -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+                <h2 class="text-lg font-bold text-gray-900"><i class="fa-solid fa-list-check mr-2 text-green-500"></i>รายการคำสั่งซื้อจากลูกค้า</h2>
+                <button onclick="loadOrders()" class="text-green-600 hover:text-green-700 text-sm font-medium flex items-center">
+                    <i class="fa-solid fa-rotate-right mr-1"></i> รีเฟรชข้อมูล
+                </button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider">
+                            <th class="p-4 font-semibold">เวลาสั่งซื้อ</th>
+                            <th class="p-4 font-semibold">ผู้รับ / เบอร์โทร</th>
+                            <th class="p-4 font-semibold">ที่อยู่จัดส่ง</th>
+                            <th class="p-4 font-semibold">รายการสินค้า</th>
+                            <th class="p-4 font-semibold">ยอดรวม</th>
+                            <th class="p-4 font-semibold">การชำระเงิน</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderTableBody" class="divide-y divide-gray-100 text-sm">
+                        <!-- Data will be injected here -->
+                        <tr>
+                            <td colspan="6" class="p-6 text-center text-gray-400">กำลังโหลดข้อมูลออเดอร์...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAzYfD5U5zB7XhL9K2mP1sV8w3Q4nE6rT0",
+            authDomain: "finfruit-shop.firebaseapp.com",
+            projectId: "finfruit-shop",
+            storageBucket: "finfruit-shop.appspot.com",
+            messagingSenderId: "123456789012",
+            appId: "1:123456789012:web:abcdef1234567890"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function fetchOrders() {
+            const tableBody = document.getElementById('orderTableBody');
+            const totalOrdersEl = document.getElementById('totalOrders');
+            const totalRevenueEl = document.getElementById('totalRevenue');
+
+            try {
+                const q = query(collection(db, "orders"), orderBy("orderDate", "desc"));
+                const querySnapshot = await getDocs(q);
+                
+                let orders = [];
+                let totalRevenue = 0;
+
+                querySnapshot.forEach((doc) => {
+                    let data = doc.data();
+                    orders.push(data);
+                    totalRevenue += (data.subtotal || 0) + (data.deliveryFee || 60);
+                });
+
+                totalOrdersEl.innerText = orders.length;
+                totalRevenueEl.innerText = `฿${totalRevenue.toLocaleString()}`;
+
+                if (orders.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-gray-400">ยังไม่มีคำสั่งซื้อในระบบ</td></tr>`;
+                    return;
+                }
+
+                let html = '';
+                orders.forEach(order => {
+                    let dateStr = new Date(order.orderDate).toLocaleString('th-TH');
+                    
+                    let itemsHtml = '<ul class="space-y-1 text-xs">';
+                    if (order.items && Array.isArray(order.items)) {
+                        order.items.forEach(item => {
+                            itemsHtml += `<li>• ${item.name} (x${item.qty})</li>`;
+                        });
+                    }
+                    itemsHtml += '</ul>';
+
+                    let paymentBadge = order.paymentMethod === 'PromptPay' 
+                        ? '<span class="bg-green-100 text-green-700 px-2.5 py-1 rounded-full text-xs font-semibold">โอนเงิน (PromptPay)</span>'
+                        : '<span class="bg-amber-100 text-amber-700 px-2.5 py-1 rounded-full text-xs font-semibold">เก็บเงินปลายทาง (COD)</span>';
+
+                    html += `
+                        <tr class="hover:bg-gray-50/50 transition">
+                            <td class="p-4 text-gray-500 whitespace-nowrap text-xs">${dateStr}</td>
+                            <td class="p-4">
+                                <p class="font-bold text-gray-900">${order.name}</p>
+                                <p class="text-xs text-gray-500">${order.phone}</p>
+                            </td>
+                            <td class="p-4 text-gray-600 max-w-xs truncate" title="${order.address}">${order.address}</td>
+                            <td class="p-4">${itemsHtml}</td>
+                            <td class="p-4 font-bold text-green-600 whitespace-nowrap">฿${((order.subtotal || 0) + (order.deliveryFee || 60)).toLocaleString()}</td>
+                            <td class="p-4 whitespace-nowrap">${paymentBadge}</td>
+                        </tr>
+                    `;
+                });
+
+                tableBody.innerHTML = html;
+
+            } catch (error) {
+                console.error("Error loading orders: ", error);
+                tableBody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-red-500">เกิดข้อผิดพลาดในการโหลดข้อมูล: ${error.message}</td></tr>`;
+            }
+        }
+
+        window.onload = fetchOrders;
+        window.loadOrders = fetchOrders;
+    </script>
+</body>
+</html>
