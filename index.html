@@ -254,10 +254,17 @@
         const DELIVERY_FEE = 30;
         let tempOrderData = {};
 
+        // โหลดข้อมูลที่เคยเซฟไว้ในเครื่องมาใส่ช่องอัตโนมัติ
         window.addEventListener('DOMContentLoaded', () => {
-            if (localStorage.getItem('saved_name')) document.getElementById('cust-name').value = localStorage.getItem('saved_name');
-            if (localStorage.getItem('saved_phone')) document.getElementById('cust-phone').value = localStorage.getItem('saved_phone');
-            if (localStorage.getItem('saved_address')) document.getElementById('cust-address').value = localStorage.getItem('saved_address');
+            if (localStorage.getItem('saved_name')) {
+                document.getElementById('cust-name').value = localStorage.getItem('saved_name');
+            }
+            if (localStorage.getItem('saved_phone')) {
+                document.getElementById('cust-phone').value = localStorage.getItem('saved_phone');
+            }
+            if (localStorage.getItem('saved_address')) {
+                document.getElementById('cust-address').value = localStorage.getItem('saved_address');
+            }
             renderProducts();
         });
 
@@ -375,6 +382,7 @@
             document.getElementById('checkout-modal').classList.add('hidden');
         };
 
+        // เมื่อกดปุ่มไปยังหน้าชำระเงิน จะเซฟข้อมูลลง localStorage ทันที
         document.getElementById('checkout-form').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -383,6 +391,7 @@
             const address = document.getElementById('cust-address').value;
             const paymentMethod = document.getElementById('payment-method').value;
 
+            // บันทึกข้อมูลลงในเบราว์เซอร์
             localStorage.setItem('saved_name', name);
             localStorage.setItem('saved_phone', phone);
             localStorage.setItem('saved_address', address);
@@ -433,7 +442,6 @@
             document.getElementById('checkout-modal').classList.remove('hidden');
         };
 
-        // แก้ไขให้กดแล้วผ่านเลยทันที ไม่ติดปัญหา SlipOK API ขัดข้อง
         window.confirmPaymentAndOrder = async function() {
             const btn = document.getElementById('confirm-pay-btn');
             
@@ -447,7 +455,7 @@
                 btn.disabled = true;
                 btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> กำลังตรวจสอบสลิปจำลอง...`;
 
-                await new Promise(resolve => setTimeout(resolve, 800)); // จำลองเวลาตรวจสอบ
+                await new Promise(resolve => setTimeout(resolve, 800));
                 tempOrderData.status = 'ชำระเงินเรียบร้อย (จำลองตรวจสอบสลิปผ่าน)';
             } else {
                 tempOrderData.status = 'รอชำระเงินปลายทาง (COD)';
