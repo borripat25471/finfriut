@@ -6,11 +6,39 @@
     font-family: 'Kanit', system-ui, -apple-system, sans-serif;
 }
 
+/* --- Dark Mode Variables --- */
+:root {
+    --bg-color: #f7f9f6;
+    --card-bg: #ffffff;
+    --text-color: #2b2d42;
+    --subtext-color: #a4b0be;
+    --navbar-bg: #ffffff;
+    --nav-border: #f1f2f6;
+    --search-bg: #f1f8f3;
+    --search-border: #e1eede;
+    --btn-bg: #eafaf1;
+    --btn-color: #20bf6b;
+}
+
+body.dark-mode {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --text-color: #f1f1f1;
+    --subtext-color: #747d8c;
+    --navbar-bg: #1e1e1e;
+    --nav-border: #2c2c2c;
+    --search-bg: #2d2d2d;
+    --search-border: #3d3d3d;
+    --btn-bg: #25332b;
+    --btn-color: #20bf6b;
+}
+
 html, body {
     height: 100vh;
     overflow-x: hidden;
-    background-color: #f7f9f6;
-    color: #2b2d42;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* --- Navbar --- */
@@ -19,11 +47,13 @@ html, body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 5%;
-    background: #ffffff;
+    background: var(--navbar-bg);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
     position: sticky;
     top: 0;
     z-index: 100;
+    border-bottom: 1px solid var(--nav-border);
+    transition: background 0.3s ease;
 }
 
 .logo {
@@ -33,14 +63,14 @@ html, body {
 }
 
 .logo span {
-    color: #2f3542;
+    color: var(--text-color);
 }
 
 .search-bar {
     display: flex;
     align-items: center;
-    background: #f1f8f3;
-    border: 1px solid #e1eede;
+    background: var(--search-bg);
+    border: 1px solid var(--search-border);
     padding: 10px 18px;
     border-radius: 30px;
     width: 40%;
@@ -49,7 +79,7 @@ html, body {
 
 .search-bar:focus-within {
     border-color: #20bf6b;
-    background: #fff;
+    background: var(--card-bg);
     box-shadow: 0 0 0 4px rgba(32, 191, 107, 0.08);
 }
 
@@ -60,25 +90,38 @@ html, body {
     margin-left: 10px;
     width: 100%;
     font-size: 0.95rem;
+    color: var(--text-color);
 }
 
-/* --- Cart Button in Nav --- */
-.cart-btn {
+.search-bar input::placeholder {
+    color: var(--subtext-color);
+}
+
+/* --- Nav Right Actions (Cart & DarkMode) --- */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* --- Cart Button & DarkMode Button (ขนาดและดีไซน์เท่ากันเป๊ะ) --- */
+.cart-btn, .dark-mode-btn {
     position: relative;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     cursor: pointer;
-    background: #eafaf1;
+    background: var(--btn-bg);
     border: none;
-    padding: 12px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    color: #20bf6b;
+    color: var(--btn-color);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
 }
 
-.cart-btn:hover {
+.cart-btn:hover, .dark-mode-btn:hover {
     background: #20bf6b;
     color: white;
     transform: scale(1.05);
@@ -98,7 +141,7 @@ html, body {
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    border: 2px solid white;
+    border: 2px solid var(--navbar-bg);
 }
 
 /* --- Hero Section --- */
@@ -139,10 +182,11 @@ html, body {
     padding: 8px 22px;
     border: none;
     border-radius: 20px;
-    background: #f1f2f6;
+    background: var(--card-bg);
     cursor: pointer;
     font-weight: 500;
-    color: #57606f;
+    color: var(--subtext-color);
+    border: 1px solid var(--nav-border);
     transition: all 0.2s ease;
     white-space: nowrap;
 }
@@ -150,6 +194,7 @@ html, body {
 .cat-btn.active, .cat-btn:hover {
     background: #20bf6b;
     color: white;
+    border-color: #20bf6b;
     box-shadow: 0 4px 10px rgba(32, 191, 107, 0.2);
 }
 
@@ -162,10 +207,10 @@ html, body {
 }
 
 .product-card {
-    background: white;
+    background: var(--card-bg);
     border-radius: 16px;
     overflow: hidden;
-    border: 1px solid #f0f0f0;
+    border: 1px solid var(--nav-border);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
     transition: all 0.3s ease;
 }
@@ -189,7 +234,7 @@ html, body {
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 6px;
-    color: #2f3542;
+    color: var(--text-color);
 }
 
 .product-price {
@@ -222,7 +267,7 @@ html, body {
     right: -400px;
     width: 380px;
     height: 100vh;
-    background: white;
+    background: var(--card-bg);
     box-shadow: -10px 0 30px rgba(0, 0, 0, 0.08);
     transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 200;
@@ -236,22 +281,23 @@ html, body {
 
 .cart-header {
     padding: 20px;
-    background: #ffffff;
+    background: var(--card-bg);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #f1f2f6;
+    border-bottom: 1px solid var(--nav-border);
 }
 
 .cart-header h3 {
     font-size: 1.1rem;
     font-weight: 600;
+    color: var(--text-color);
 }
 
 .close-btn {
     font-size: 1.3rem;
     cursor: pointer;
-    color: #a4b0be;
+    color: var(--subtext-color);
     transition: color 0.2s;
 }
 
@@ -270,16 +316,16 @@ html, body {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 15px;
-    background: #fdfdfd;
-    border: 1px solid #f1f2f6;
+    background: var(--bg-color);
+    border: 1px solid var(--nav-border);
     padding: 12px;
     border-radius: 12px;
 }
 
 .cart-footer {
     padding: 20px;
-    border-top: 1px solid #f1f2f6;
-    background: #ffffff;
+    border-top: 1px solid var(--nav-border);
+    background: var(--card-bg);
 }
 
 .total-price {
@@ -288,6 +334,7 @@ html, body {
     margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
+    color: var(--text-color);
 }
 
 .checkout-btn {
@@ -313,16 +360,13 @@ html, body {
 @media (max-width: 768px) {
     .navbar {
         padding: 1rem 4%;
+        flex-wrap: wrap;
     }
     
     .search-bar {
         width: 100%;
         order: 3;
         margin-top: 10px;
-    }
-
-    .navbar {
-        flex-wrap: wrap;
     }
     
     .product-grid {

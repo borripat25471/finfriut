@@ -22,18 +22,17 @@ const products = [
     // --- พริกเกลือ / น้ำจิ้มแซ่บ ---
     { id: 15, name: 'พริกเกลือลาวดำสูตรเด็ด', price: 30, category: 'พริกเกลือ / น้ำจิ้มแซ่บ', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7CV6R_BSmAYY1fQXzi5llegzOaKRLFNymP733CBcDRw&s=10' },
     { id: 16, name: 'น้ำปลาหวานเข้มข้นกุ้งแน่นๆ', price: 45, category: 'พริกเกลือ / น้ำจิ้มแซ่บ', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp7qsJ43WZmdswSnwgdjFK_ZqtW6Ge9QDD43enZ4b0ew&s=10' },
-    
 ];
 
 let cart = [];
-let currentCategory = 'ทั้งหมด'; // ตัวแปรจำหมวดหมู่ที่เลือกอยู่ปัจจุบัน
+let currentCategory = 'ทั้งหมด';
 
 // ฟังก์ชันแสดงรายการสินค้า
 function renderProducts(itemsToRender = products) {
     const grid = document.getElementById('productGrid');
     
     if (itemsToRender.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888; padding: 40px 0;">ไม่พบรายการสินค้าที่ตรงกัน</p>';
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--subtext-color); padding: 40px 0;">ไม่พบรายการสินค้าที่ตรงกัน</p>';
         return;
     }
 
@@ -51,7 +50,7 @@ function renderProducts(itemsToRender = products) {
     `).join('');
 }
 
-// ฟังก์ชันค้นหาจากช่อง Search (ทำงานร่วมกับหมวดหมู่ที่เลือก)
+// ฟังก์ชันค้นหาจากช่อง Search
 function searchProducts() {
     const searchInput = document.getElementById('searchInput');
     const keyword = searchInput ? searchInput.value.trim().toLowerCase() : '';
@@ -69,13 +68,11 @@ function searchProducts() {
 function filterCategory(categoryName, event) {
     currentCategory = categoryName;
 
-    // ปรับสถานะปุ่ม Active
     document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
     if (event && event.target) {
         event.target.classList.add('active');
     }
 
-    // เรียกฟังก์ชันกรองข้อมูล
     searchProducts();
 }
 
@@ -95,10 +92,10 @@ function updateCartUI() {
         cartItems.innerHTML = cart.map((item, index) => `
             <div class="cart-item">
                 <div>
-                    <h4>${item.name}</h4>
+                    <h4 style="color: var(--text-color); font-size: 0.95rem;">${item.name}</h4>
                     <p style="color:#20bf6b; font-weight:bold;">฿${item.price}</p>
                 </div>
-                <button onclick="removeFromCart(${index})" style="background:none; border:none; color:red; cursor:pointer;">
+                <button onclick="removeFromCart(${index})" style="background:none; border:none; color:red; cursor:pointer; font-size: 1rem;">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </div>
@@ -129,5 +126,31 @@ function checkout() {
     toggleCart();
 }
 
-// เรียกใช้งานครั้งแรก
-renderProducts();
+// ฟังก์ชันสลับโหมดมืด / สว่าง
+function toggleDarkMode() {
+    const body = document.body;
+    const darkModeBtn = document.getElementById('darkModeBtn');
+    
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        darkModeBtn.innerText = '☀️';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        darkModeBtn.innerText = '🌙';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+// โหลดข้อมูลและค่าธีมที่บันทึกไว้เมื่อเปิดหน้าเว็บ
+window.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    const darkModeBtn = document.getElementById('darkModeBtn');
+    
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        if (darkModeBtn) darkModeBtn.innerText = '☀️';
+    }
+    
+    renderProducts();
+});

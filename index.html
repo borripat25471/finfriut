@@ -14,11 +14,18 @@
         <div class="logo"><i class="fa-solid fa-utensils"></i> Fin<span>Fruit</span></div>
         <div class="search-bar">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="ค้นหาเมนูอร่อย..." oninput="searchProducts()">
+            <input type="text" id="searchInput" placeholder="ค้นหาผลไม้สด..." oninput="searchProducts()">
         </div>
-        <div class="cart-btn" onclick="toggleCart()">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span class="cart-count" id="cartCount">0</span>
+        
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <div class="cart-btn" onclick="toggleCart()">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+            <!-- ปุ่ม Dark Mode กลมสวยขนาดเท่าปุ่มตะกร้า -->
+            <button onclick="toggleDarkMode()" id="darkModeBtn" title="สลับโหมดมืด/สว่าง" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background-color: var(--btn-bg, #f1f2f6); border: none; border-radius: 50%; font-size: 18px; cursor: pointer; transition: background 0.2s;">
+                🌙
+            </button>
         </div>
     </header>
 
@@ -36,11 +43,10 @@
             <button class="cat-btn" onclick="filterCategory('ผลไม้พร้อมทาน', event)">ผลไม้พร้อมทาน</button>
             <button class="cat-btn" onclick="filterCategory('น้ำผลไม้คั้นสด / สมูทตี้', event)">น้ำผลไม้คั้นสด / สมูทตี้</button>
             <button class="cat-btn" onclick="filterCategory('พริกเกลือ / น้ำจิ้มแซ่บ', event)">พริกเกลือ / น้ำจิ้มแซ่บ</button>
-            
         </div>
 
         <div class="product-grid" id="productGrid">
-            <!-- Products will be loaded via JavaScript -->
+            <!-- โหลดสินค้าผ่าน JavaScript -->
         </div>
     </main>
 
