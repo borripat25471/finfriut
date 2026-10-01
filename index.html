@@ -140,7 +140,7 @@
                     <div>
                         <label class="block text-sm font-bold text-gray-700 mb-1.5">เลือกช่องทางชำระเงิน</label>
                         <select id="payment-method" class="w-full px-4 py-3.5 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:outline-none bg-gray-50/50 text-sm font-medium transition">
-                            <option value="PromptPay">📱 สแกนจ่าย QR Code / พร้อมเพย์</option>
+                            <option value="PromptPay">📱 สแกนจ่าย QR Code / พร้อมเพย์ (ตรวจสลิปอัตโนมัติ)</option>
                             <option value="Cash">💵 ชำระเงินสดปลายทาง (COD)</option>
                         </select>
                     </div>
@@ -165,19 +165,24 @@
                 <div class="flex justify-between items-center border-b pb-3.5">
                     <h3 class="text-base font-bold text-gray-800 flex items-center space-x-2">
                         <i class="fa-solid fa-qrcode text-emerald-600 text-lg"></i>
-                        <span>หน้าชำระเงินสด / พร้อมเพย์</span>
+                        <span>หน้าชำระเงิน / ตรวจสอบสลิป</span>
                     </h3>
                     <button onclick="closePaymentScreen()" class="text-gray-400 hover:text-gray-600 text-2xl font-bold">&times;</button>
                 </div>
 
-                <!-- QR Box -->
+                <!-- QR Box & Slip Upload -->
                 <div id="pay-qr-container" class="bg-gradient-to-b from-emerald-50 to-teal-50/50 border border-emerald-200/60 rounded-3xl p-6 space-y-3.5 shadow-inner">
-                    <p class="text-xs font-bold text-emerald-800 uppercase tracking-wide">กรุณาสแกน QR Code เพื่อชำระเงิน</p>
+                    <p class="text-xs font-bold text-emerald-800 uppercase tracking-wide">สแกน QR Code พร้อมเพย์ (063-164-7907)</p>
                     <div class="bg-white p-4 inline-block rounded-2xl shadow-md border border-emerald-100">
-                        <img id="payment-qr-img" src="" alt="QR" class="w-44 h-44 mx-auto object-contain">
+                        <img id="payment-qr-img" src="" alt="QR" class="w-40 h-40 mx-auto object-contain">
                     </div>
                     <p id="pay-total-text" class="text-lg font-extrabold text-gray-800">ยอดชำระ: ฿0</p>
-                    <p class="text-xs text-gray-500">ใช้แอปธนาคารใดก็ได้สแกนเพื่อจ่ายเงิน</p>
+                    
+                    <!-- ส่วนอัปโหลดสลิปเช็ค SlipOK -->
+                    <div class="pt-2 border-t border-emerald-200/60 text-left space-y-2">
+                        <label class="block text-xs font-bold text-emerald-900">แนบสลิปโอนเงิน (ตรวจสอบอัตโนมัติ)</label>
+                        <input type="file" id="slip-file-input" accept="image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-600 file:text-white hover:file:bg-emerald-700 cursor-pointer">
+                    </div>
                 </div>
 
                 <!-- Cash Note Box -->
@@ -191,7 +196,7 @@
                 <div class="space-y-2.5 pt-2">
                     <button onclick="confirmPaymentAndOrder()" id="confirm-pay-btn" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-emerald-600/30 transition-all duration-300 flex items-center justify-center space-x-2 text-base active:scale-95">
                         <i class="fa-solid fa-circle-check"></i>
-                        <span>ยืนยันการชำระเงินสำเร็จ</span>
+                        <span>ยืนยันการชำระเงิน</span>
                     </button>
                     <button onclick="backToCheckoutForm()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-600 font-semibold py-3 rounded-xl text-sm transition">
                         ย้อนกลับไปแก้ที่อยู่
@@ -207,14 +212,14 @@
             <i class="fa-solid fa-check"></i>
         </div>
         <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">สั่งซื้อสินค้าสำเร็จแล้ว! 🎉</h2>
-        <p class="text-gray-500 text-sm max-w-sm">ขอบคุณที่ใช้บริการ FinFruit ระบบได้บันทึกคำสั่งซื้อและส่งข้อมูลให้ร้านค้าเตรียมจัดส่งผลไม้สดให้คุณทันทีครับ</p>
+        <p class="text-gray-500 text-sm max-w-sm">ขอบคุณที่ใช้บริการ FinFruit ระบบได้ตรวจสอบสลิปและบันทึกคำสั่งซื้อเรียบร้อยแล้วครับ</p>
         
         <div class="bg-gray-50 border border-gray-100 rounded-3xl p-5 w-full max-w-sm text-left space-y-2 text-xs text-gray-600 shadow-md">
             <p><strong>ผู้รับ:</strong> <span id="suc-name" class="font-medium"></span></p>
             <p><strong>เบอร์โทร:</strong> <span id="suc-phone" class="font-medium"></span></p>
             <p><strong>ที่อยู่:</strong> <span id="suc-address" class="font-medium"></span></p>
             <p><strong>ยอดชำระสุทธิ:</strong> <span id="suc-total" class="font-bold text-emerald-600 text-sm"></span></p>
-            <p><strong>สถานะ:</strong> <span class="text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-md">ชำระเงินเรียบร้อยแล้ว ✅</span></p>
+            <p><strong>สถานะ:</strong> <span class="text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-md">ชำระเงินสำเร็จ (ตรวจสอบสลิปแล้ว) ✅</span></p>
         </div>
 
         <button onclick="finishAndReset()" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold px-10 py-4 rounded-2xl shadow-lg shadow-emerald-600/30 transition text-base active:scale-95">
@@ -412,8 +417,11 @@
                 qrContainer.classList.remove('hidden');
                 cashContainer.classList.add('hidden');
                 document.getElementById('pay-total-text').innerText = `ยอดชำระสุทธิ: ฿${total}`;
-                document.getElementById('payment-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=PromptPay_${total}`;
-                confirmBtnText.innerText = 'ยืนยันการชำระเงิน (สแกนจ่ายแล้ว)';
+                
+                // สร้าง QR พร้อมเพย์จากเบอร์ 0631647907 และยอดเงินรวม
+                document.getElementById('payment-qr-img').src = `https://promptpay.io/0631647907/${total}.png`;
+                
+                confirmBtnText.innerText = 'ยืนยันและตรวจสอบสลิป';
             } else {
                 qrContainer.classList.add('hidden');
                 cashContainer.classList.remove('hidden');
@@ -433,10 +441,55 @@
 
         window.confirmPaymentAndOrder = async function() {
             const btn = document.getElementById('confirm-pay-btn');
-            btn.disabled = true;
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึกคำสั่งซื้อ...`;
+            
+            if (tempOrderData.paymentMethod === 'PromptPay') {
+                const slipInput = document.getElementById('slip-file-input');
+                if (!slipInput.files || slipInput.files.length === 0) {
+                    alert('กรุณาแนบรูปสลิปโอนเงินเพื่อตรวจสอบก่อนยืนยันครับ');
+                    return;
+                }
 
-            tempOrderData.status = tempOrderData.paymentMethod === 'PromptPay' ? 'ชำระเงินเรียบร้อย (ผ่าน QR)' : 'รอชำระเงินปลายทาง (COD)';
+                const slipFile = slipInput.files[0];
+                const formData = new FormData();
+                formData.append('files', slipFile);
+                formData.append('amount', tempOrderData.totalPrice);
+
+                btn.disabled = true;
+                btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> กำลังตรวจสอบสลิปกับธนาคาร...`;
+
+                try {
+                    const response = await fetch('https://api.slipok.com/api/line/apikey/77455', {
+                        method: 'POST',
+                        headers: {
+                            'x-api-key': 'SLIPOK43LRD3O'
+                        },
+                        body: formData
+                    });
+
+                    const result = await response.json();
+
+                    if (!result.success) {
+                        alert('ตรวจสอบสลิปไม่ผ่าน: ' + (result.message || 'สลิปไม่ถูกต้อง หรือยอดเงินไม่ตรงกัน'));
+                        btn.disabled = false;
+                        btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>ยืนยันและตรวจสอบสลิป</span>`;
+                        return;
+                    }
+
+                    tempOrderData.slipData = result.data;
+                    tempOrderData.status = 'ชำระเงินเรียบร้อย (ตรวจสอบสลิปผ่าน SlipOK)';
+
+                } catch (error) {
+                    console.error("SlipOK Error:", error);
+                    alert('เกิดข้อผิดพลาดในการเชื่อมต่อระบบตรวจสอบสลิป กรุณาลองใหม่อีกครั้ง');
+                    btn.disabled = false;
+                    btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>ยืนยันและตรวจสอบสลิป</span>`;
+                    return;
+                }
+            } else {
+                tempOrderData.status = 'รอชำระเงินปลายทาง (COD)';
+            }
+
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึกคำสั่งซื้อ...`;
 
             try {
                 await addDoc(collection(db, "orders"), tempOrderData);
@@ -453,13 +506,14 @@
                 cart = [];
                 updateCartUI();
                 document.getElementById('checkout-form').reset();
+                document.getElementById('slip-file-input').value = '';
 
             } catch (error) {
                 console.error("Error adding order: ", error);
                 alert('เกิดข้อผิดพลาดในการบันทึกออเดอร์ กรุณาลองใหม่อีกครั้ง');
             } finally {
                 btn.disabled = false;
-                btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>ยืนยันการชำระเงินสำเร็จ</span>`;
+                btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>ยืนยันการชำระเงิน</span>`;
             }
         };
 
