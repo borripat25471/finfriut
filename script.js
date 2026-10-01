@@ -1,23 +1,23 @@
 const products = [
     // --- ผลไม้สดตามฤดูกาล ---
-    { id: 1, name: 'ทุเรียนหมอนทองคัดเกรดพรีเมียม', price: 350, category: 'ผลไม้สดตามฤดูกาล', img: 'https://images.unsplash.com/photo-1595124115792-2c67cf1424d5?w=500' },
+    { id: 1, name: 'ทุเรียนหมอนทองคัดเกรดพรีเมียม', price: 350, category: 'ผลไม้สดตามฤดูกาล', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS--Vuvj1Cihw94tqF-rmbH39QdLkgUQwwVsH5U1yW1Mw&s=10' },
     { id: 2, name: 'มะม่วงน้ำดอกไม้สุกหวานฉ่ำ', price: 120, category: 'ผลไม้สดตามฤดูกาล', img: 'https://images.unsplash.com/photo-1553279768-865429fa0078?w=500' },
     { id: 3, name: 'ส้มเขียวหวานสดจากสวน', price: 90, category: 'ผลไม้สดตามฤดูกาล', img: 'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=500' },
-    { id: 4, name: 'มังคุดคัดเกรด A สดจากสวน', price: 150, category: 'ผลไม้สดตามฤดูกาล', img: 'https://images.unsplash.com/photo-1599354508493-4a112255743b?w=500' },
+    { id: 4, name: 'มังคุดคัดเกรด A สดจากสวน', price: 150, category: 'ผลไม้สดตามฤดูกาล', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB9huzyAyjytj5pllz8W1qePawUSK70OvF2SdOKANElw&s=10' },
     { id: 5, name: 'เงาะโรงเรียนหวานกรอบ', price: 80, category: 'ผลไม้สดตามฤดูกาล', img: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=500' },
 
     // --- ผลไม้พร้อมทาน ---
     { id: 6, name: 'มะม่วงเบาพร้อมทาน + น้ำปลาหวาน', price: 79, category: 'ผลไม้พร้อมทาน', img: 'https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?w=500' },
-    { id: 7, name: 'ฝรั่งกิมจูแช่บ๊วยกรอบๆ', price: 60, category: 'ผลไม้พร้อมทาน', img: 'https://images.unsplash.com/photo-1536483252553-61a7b0f80730?w=500' },
+    { id: 7, name: 'ฝรั่งกิมจูแช่บ๊วยกรอบๆ', price: 60, category: 'ผลไม้พร้อมทาน', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpFykofDYAOp4gcX8FSdC965SK3aEd9L68IOy0rJEahg&s=10' },
     { id: 8, name: 'สับปะรดภูเก็ตหั่นชิ้นพร้อมทาน', price: 50, category: 'ผลไม้พร้อมทาน', img: 'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=500' },
-    { id: 9, name: 'มะละกอฮอลแลนด์หวานฉ่ำพร้อมทาน', price: 45, category: 'ผลไม้พร้อมทาน', img: 'https://images.unsplash.com/photo-1517260739337-6799e23978d0?w=500' },
+    { id: 9, name: 'มะละกอฮอลแลนด์หวานฉ่ำพร้อมทาน', price: 45, category: 'ผลไม้พร้อมทาน', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2LSVd2jKJ4LLFc6NNdKMwj3Fq92DuLJ2kvvqTt4wulw&s=10' },
     { id: 10, name: 'แก้วมังกรแดงหวานฉ่ำ', price: 55, category: 'ผลไม้พร้อมทาน', img: 'https://images.unsplash.com/photo-1527661591475-527312dd65f5?w=500' },
 
     // --- น้ำผลไม้คั้นสด / สมูทตี้ ---
     { id: 11, name: 'น้ำส้มคั้นสดแท้ 100% (ไม่ผสมน้ำตาล)', price: 65, category: 'น้ำผลไม้คั้นสด / สมูทตี้', img: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?w=500' },
-    { id: 12, name: 'น้ำมะพร้าวน้ำหอมแท้สดจากลูก', price: 50, category: 'น้ำผลไม้คั้นสด / สมูทตี้', img: 'https://images.unsplash.com/photo-1546171753-97d7676e2e01?w=500' },
+    { id: 12, name: 'น้ำมะพร้าวน้ำหอมแท้สดจากลูก', price: 50, category: 'น้ำผลไม้คั้นสด / สมูทตี้', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvKcDJNx-d6NyqKpgJSltYJK7hsSNnpKBYiMUcM9x84Q&s=10' },
     { id: 13, name: 'สมูทตี้มะม่วงปั่นโยเกิร์ต', price: 85, category: 'น้ำผลไม้คั้นสด / สมูทตี้', img: 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=500' },
-    { id: 14, name: 'น้ำเสาวรสแท้คั้นสด', price: 60, category: 'น้ำผลไม้คั้นสด / สมูทตี้', img: 'https://images.unsplash.com/photo-1543253687-c931c8e91820?w=500' },
+    { id: 14, name: 'น้ำเสาวรสแท้คั้นสด', price: 60, category: 'น้ำผลไม้คั้นสด / สมูทตี้', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpRMmsgV-HFcU4iZLin7nFHQK2NNlAA8S9Z0GbIDxIzA&s=10' },
 
     // --- พริกเกลือ / น้ำจิ้มแซ่บ ---
     { id: 15, name: 'พริกเกลือลาวดำสูตรเด็ด', price: 30, category: 'พริกเกลือ / น้ำจิ้มแซ่บ', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7CV6R_BSmAYY1fQXzi5llegzOaKRLFNymP733CBcDRw&s=10' },
