@@ -1,6 +1,6 @@
 const products = [
     // --- ผลไม้สดตามฤดูกาล ---
-    { id: 1, name: 'ทุหมอนทองคัดเกรดพรีเมียม', price: 350, category: 'ผลไม้สดตามฤดูกาล', img: 'https://images.unsplash.com/photo-1595124115792-2c67cf1424d5?w=500' },
+    { id: 1, name: 'ทุหมอนทองคัดเกรดพรีเมียม', price: 350, category: 'ผลไม้สดตามฤดูกาล', img: 'https://images.unsplash.com/photo-1562486683-67d4d5886f99?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8JUUwJUI4JTk3JUUwJUI4JUI4JUUwJUI5JTgwJUUwJUI4JUEzJUUwJUI4JUI1JUUwJUI4JUEyJUUwJUI4JTk5fGVufDB8fDB8fHww' },
     { id: 2, name: 'มะม่วงน้ำดอกไม้สุกหวานฉ่ำ', price: 120, category: 'ผลไม้สดตามฤดูกาล', img: 'https://images.unsplash.com/photo-1553279768-865429fa0078?w=500' },
     { id: 3, name: 'ส้มเขียวหวานสดจากสวน', price: 90, category: 'ผลไม้สดตามฤดูกาล', img: 'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=500' },
 
@@ -11,11 +11,11 @@ const products = [
 
     // --- น้ำผลไม้คั้นสด / สมูทตี้ ---
     { id: 7, name: 'น้ำส้มคั้นสดแท้ 100% (ไม่ผสมน้ำตาล)', price: 65, category: 'น้ำผลไม้คั้นสด / สมูทตี้', img: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?w=500' },
-    { id: 8, name: 'น้ำมะพร้าวน้ำหอมแท้สดจากลูก', price: 50, category: 'น้ำผลไม้คั้นสด / สมูทตี้', img: 'https://images.unsplash.com/photo-1546171753-97d7676e2e01?w=500' },
+    { id: 8, name: 'น้ำมะพร้าวน้ำหอมแท้สดจากลูก', price: 50, category: 'น้ำผลไม้คั้นสด / สมูทตี้', img: 'https://images.unsplash.com/photo-1569173907630-a71ea55bb72f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8JUUwJUI4JTk5JUUwJUI5JTg5JUUwJUI4JUIzJUUwJUI4JUExJUUwJUI4JUIwJUUwJUI4JTlFJUUwJUI4JUEzJUUwJUI5JTg5JUUwJUI4JUIyJUUwJUI4JUE3fGVufDB8fDB8fHww' },
     { id: 9, name: 'สมูทตี้มะม่วงปั่นโยเกิร์ต', price: 85, category: 'น้ำผลไม้คั้นสด / สมูทตี้', img: 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=500' },
 
     // --- พริกเกลือ / น้ำจิ้มแซ่บ ---
-    { id: 10, name: 'พริกเกลือลาวดำสูตรเด็ด', price: 30, category: 'พริกเกลือ / น้ำจิ้มแซ่บ', img: 'https://images.unsplash.com/photo-1583160248555-d226a083d97b?w=500' },
+    { id: 10, name: 'พริกเกลือลาวดำสูตรเด็ด', price: 30, category: 'พริกเกลือ / น้ำจิ้มแซ่บ', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7CV6R_BSmAYY1fQXzi5llegzOaKRLFNymP733CBcDRw&s=10' },
     { id: 11, name: 'น้ำปลาหวานเข้มข้นกุ้งแน่นๆ', price: 45, category: 'พริกเกลือ / น้ำจิ้มแซ่บ', img: 'https://images.unsplash.com/photo-1541658016709-82535e94bc69?w=500' },
     { id: 12, name: 'พริกเกลือพริกสดบดละเอียด', price: 25, category: 'พริกเกลือ / น้ำจิ้มแซ่บ', img: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500' }
 ];
