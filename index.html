@@ -36,12 +36,20 @@
                     <p class="text-xs sm:text-sm text-gray-400 font-semibold tracking-wide">สด ส่งไว อร่อยเต็มคำ 🌟</p>
                 </div>
             </div>
-            <!-- Cart Button -->
-            <button onclick="toggleCart()" class="relative bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-semibold px-6 py-3 rounded-2xl transition-all duration-300 flex items-center space-x-2.5 border border-emerald-200/60 shadow-sm hover:shadow-md active:scale-95">
-                <i class="fa-solid fa-cart-shopping text-emerald-600 text-lg"></i>
-                <span>ตะกร้าสินค้า</span>
-                <span id="cart-badge" class="absolute -top-2 -right-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/40">0</span>
-            </button>
+            
+            <!-- ปุ่มทางขวา (เพิ่มปุ่มหลังบ้านแอดมิน + ตะกร้าสินค้า) -->
+            <div class="flex items-center space-x-3">
+                <a href="adminqop777_2.html" target="_blank" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-4 py-3 rounded-2xl transition-all duration-300 flex items-center space-x-2 text-sm border border-gray-200">
+                    <i class="fa-solid fa-lock text-gray-500"></i>
+                    <span class="hidden sm:inline">หลังบ้านแอดมิน</span>
+                </a>
+
+                <button onclick="toggleCart()" class="relative bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-semibold px-6 py-3 rounded-2xl transition-all duration-300 flex items-center space-x-2.5 border border-emerald-200/60 shadow-sm hover:shadow-md active:scale-95">
+                    <i class="fa-solid fa-cart-shopping text-emerald-600 text-lg"></i>
+                    <span>ตะกร้าสินค้า</span>
+                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/40">0</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -387,7 +395,7 @@
 
             tempOrderData = {
                 customerName: name,
-                name: name, // เพิ่มบรรทัดนี้เพื่อให้ส่งชื่อไปตรงกับฐานข้อมูล Firestore ไม่ให้ขึ้น undefined
+                name: name,
                 phone: phone,
                 address: address,
                 paymentMethod: paymentMethod,
