@@ -21,7 +21,7 @@ const products = [
 
     // --- พริกเกลือ / น้ำจิ้มแซ่บ ---
     { id: 15, name: 'พริกเกลือลาวดำสูตรเด็ด', price: 30, category: 'พริกเกลือ / น้ำจิ้มแซ่บ', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7CV6R_BSmAYY1fQXzi5llegzOaKRLFNymP733CBcDRw&s=10' },
-    { id: 16, name: 'น้ำปลาหวานเข้มข้นกุ้งแน่นๆ', price: 45, category: 'พริกเกลือ / น้ำจิ้มแซ่บ', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpFykofDYAOp4gcX8FSdC965SK3aEd9L68IOy0rJEahg&s=10' },
+    { id: 16, name: 'น้ำปลาหวานเข้มข้นกุ้งแน่นๆ', price: 45, category: 'พริกเกลือ / น้ำจิ้มแซ่บ', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp7qsJ43WZmdswSnwgdjFK_ZqtW6Ge9QDD43enZ4b0ew&s=10' },
     
 ];
 
