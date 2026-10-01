@@ -3,7 +3,7 @@ const products = [
     { id: 1, name: 'ทุเรียนหมอนทอง', price: 350, category: 'ผลไม้สดตามฤดูกาล', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS--Vuvj1Cihw94tqF-rmbH39QdLkgUQwwVsH5U1yW1Mw&s=10' },
     { id: 2, name: 'มะม่วงน้ำดอกไม้', price: 120, category: 'ผลไม้สดตามฤดูกาล', img: 'https://images.unsplash.com/photo-1553279768-865429fa0078?w=500' },
     { id: 3, name: 'ส้มเขียวหวาน', price: 90, category: 'ผลไม้สดตามฤดูกาล', img: 'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=500' },
-    { id: 4, name: 'มังคุดคัดเกรด', price: 150, category: 'ผลไม้สดตามฤดูกาล', img: 'https://images.unsplash.com/photo-1599354508493-4a112255743b?w=500' },
+    { id: 4, name: 'มังคุดคัดเกรด', price: 150, category: 'ผลไม้สดตามฤดูกาล', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB9huzyAyjytj5pllz8W1qePawUSK70OvF2SdOKANElw&s=10' },
     { id: 5, name: 'เงาะโรงเรียน', price: 80, category: 'ผลไม้สดตามฤดูกาล', img: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=500' },
 
     // --- ผลไม้พร้อมทาน ---
